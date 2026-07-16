@@ -1,5 +1,8 @@
 # API Data Wilayah Indonesia
 
+> **Created by Antono**
+
+
 ## Apa yang dimaksud API statis?
 API statis adalah API yang endpoint-nya terdiri dari file statis.
 
