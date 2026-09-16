@@ -1,155 +1,133 @@
-<!-- README ini dihasilkan otomatis oleh .github/workflows/generate-readme.yml -->
-<!-- Jangan edit manual: perubahan akan ditimpa pada run berikutnya. -->
+# Latihan HMVC CodeIgniter 4 — Pencarian Wilayah Indonesia
 
-<h1 align="center">wilayah-indonesia-CI-4 👋</h1>
+Contoh aplikasi **HMVC (Hierarchical Model-View-Controller)** pada CodeIgniter 4:
+pencarian kabupaten/kecamatan dengan autocomplete, plus modul CRUD produk
+sederhana.
 
-<p align="center">
-  <em>API Wilayah Indonesia adalah API data wilayah seluruh indonesia mulai dari Provinsi, Kabupaten/Kota, Kecamatan dan Kelurahan/Desa.</em>
-</p>
-
-<p align="center">
-  <a href="https://github.com/antono4/wilayah-indonesia-CI-4"><img alt="GitHub repo" src="https://img.shields.io/badge/GitHub-antono4/wilayah-indonesia-CI-4-blue?logo=github"></a>
-  <img alt="Files" src="https://img.shields.io/badge/Files-601-informational">
-  <img alt="Updated" src="https://img.shields.io/static/v1?label=Updated&message=2026-09-16%2010%3A43%3A12%20WIB&color=lightgrey">
-</p>
+> **Catatan penting:** repositori ini adalah **bahan latihan/tutorial**, bukan
+> REST API wilayah Indonesia yang siap pakai. Lihat
+> [Status Proyek](#-status-proyek) di bawah sebelum memakainya.
 
 ---
 
-## 📖 Tentang
+## Daftar Isi
 
-Repository **`wilayah-indonesia-CI-4`** adalah proyek PHP yang dibangun dengan HTML, CSS, JavaScript, PHP.
-GitHub Pages belum diaktifkan untuk repository ini.
+- [Apa yang ada di sini](#-apa-yang-ada-di-sini)
+- [Status Proyek](#-status-proyek)
+- [Menjalankan Secara Lokal](#-menjalankan-secara-lokal)
+- [Struktur Proyek](#-struktur-proyek)
+- [Peringatan Keamanan](#-peringatan-keamanan)
+- [Rencana Perbaikan](#-rencana-perbaikan)
+- [Lisensi](#-lisensi)
 
-## 🗂️ Struktur Proyek
+---
 
-```
-wilayah-indonesia-CI-4/
-.github/
-  workflows/
-LICENSE
-PETUNJUK.txt
-README.md
-app/
-  .htaccess
-  Common.php
-  Config/
-  Controllers/
-  Database/
-  Filters/
-  Helpers/
-  Language/
-  Libraries/
-  Models/
-  Modules/
-  ThirdParty/
-  Views/
-  index.html
-composer.json
-index.php
-phpunit.xml.dist
-public/
-  .htaccess
-  favicon.ico
-  images/
-  index.php
-  robots.txt
-  themes/
-  vendors/
-spark
-system/
-  .htaccess
-  API/
-  Autoloader/
-  BaseModel.php
-  CLI/
-  Cache/
-  CodeIgniter.php
-  Commands/
-  Common.php
-  ComposerScripts.php
-  Config/
-  Controller.php
-  Cookie/
-  Database/
-  Debug/
-  Email/
-  Encryption/
-  Entity/
-  Entity.php
-  Events/
-  Exceptions/
-  Files/
-  Filters/
-  Format/
-  HTTP/
-  Helpers/
-  Honeypot/
-  I18n/
-  Images/
-  Language/
-  Log/
-  Model.php
-  Modules/
-  Pager/
-  RESTful/
-  Router/
-  Security/
-  Session/
-  Test/
-  ThirdParty/
-  Throttle/
-  Typography/
-  Validation/
-  View/
-  bootstrap.php
-  index.html
-writable/
-  .htaccess
-  cache/
-  logs/
-  session/
-  uploads/
-```
+## 📦 Apa yang ada di sini
 
-## 🌐 Sub-Proyek / Demo
+| Modul | Isi | Keterangan |
+|---|---|---|
+| `app/Modules/Home` | Autocomplete kabupaten/kecamatan | Mencari dari tabel `m_provinsi`, `m_kabupaten`, `m_kecamatan` |
+| `app/Modules/Produk` | CRUD produk | Form tambah/edit/hapus sederhana |
 
-Repository ini juga memuat sub-proyek (masing-masing punya `index.html` tersendiri):
+Aplikasi memakai HMVC: setiap modul punya `Controllers/`, `Models/`,
+`Views/`, dan `Routes.php` sendiri.
 
-| Folder | Keterangan |
-|--------|-----------|
-| [`app`](./app) | 403 Forbidden |
-| [`system`](./system) | 403 Forbidden |
+## 📌 Status Proyek
 
-## 🛠️ Teknologi
+Ditulis apa adanya supaya tidak menyesatkan:
 
-Berdasarkan ekstensi berkas yang terdeteksi di repository:
-
-- `HTML`
-- `CSS`
-- `JavaScript`
-- `PHP`
-
-> Total **601 berkas** di repository (di luar `.git`, `node_modules`, `dist`, dan `build`).
+- **Skema database tidak disertakan.** Tabel `m_provinsi`, `m_kabupaten`, dan
+  `m_kecamatan` dirujuk oleh `app/Modules/Home/Models/homeModel.php`, tetapi
+  tidak ada migration, seeder, maupun berkas `.sql` di repositori ini.
+  Tanpa tabel tersebut, fitur pencarian **tidak akan jalan**.
+- **Sebagian besar berkas adalah framework.** Dari 601 berkas, 479 di
+  antaranya adalah `system/` bawaan CodeIgniter 4. Kode milik sendiri ada di
+  `app/`.
+- **Halaman utama belum beranda.** Route `/home` menampilkan view `result`
+  (`app/Modules/Home/Views/result.php`) yang berisi form pencarian, bukan
+  landing page.
+- **`app/Controllers/Home__.php`** (dengan akhiran `__`) tidak terpakai —
+  sisa percobaan. Berkas ini juga tidak memakai namespace HMVC yang sama
+  dengan modul di `app/Modules/`.
+- **Tidak ada `.gitignore`.** Sebelum ini, `writable/` (cache, log, sesi,
+  unggahan) ikut ter-commit.
 
 ## 🚀 Menjalankan Secara Lokal
 
-Butuh PHP dan Composer:
+Butuh PHP 8.1+ dan Composer.
 
 ```bash
 composer install
-php spark serve
-# atau
+
+# Cara 1: sesuai PETUNJUK.txt — tanpa spark
+#   copy ke htdocs, lalu sesuaikan baseURL di app/Config/App.php
+#
+# Cara 2: server bawaan PHP
 php -S localhost:8000 -t public
+
+# Cara 3: spark
+php spark serve
 ```
 
-## 📬 Kontak
+Lalu buka `http://localhost:8000/home`.
 
-- GitHub: [antono4](https://github.com/antono4)
+Isi kredensial database di `app/Config/Database.php` (atau lewat `.env`),
+lalu siapkan sendiri tabel `m_provinsi`, `m_kabupaten`, dan `m_kecamatan`
+karena skemanya belum disertakan.
+
+## 🗂️ Struktur Proyek
+
+```text
+wilayah-indonesia-CI-4/
+├── app/
+│   ├── Config/            # konfigurasi CodeIgniter
+│   ├── Controllers/       # BaseController + Home__.php (tidak terpakai)
+│   ├── Models/            # BaseModel
+│   ├── Modules/
+│   │   ├── Home/          # autocomplete wilayah
+│   │   └── Produk/        # CRUD produk
+│   └── Views/
+│       └── themes/modern/ # header & footer tema
+├── public/                # document root (index.php)
+├── system/                # framework CodeIgniter 4 (jangan diubah)
+├── writable/              # cache, log, sesi, unggahan
+├── composer.json
+├── index.php
+└── spark
+```
+
+## ⚠️ Peringatan Keamanan
+
+Ada temuan yang perlu ditangani:
+
+1. **API key RajaOngkir ter-hardcode di kode publik.**
+   `app/Modules/Home/Controllers/Home.php` memuat key tersebut sebagai nilai
+   literal di dalam kelas `Home` (dicari dengan `rajaongkir`). Repositori ini
+   publik, jadi key tersebut harus dianggap **sudah bocor**. Cabut/regenerasi
+   key di dashboard RajaOngkir, lalu baca dari `.env`.
+2. **Ganti key juga di riwayat git.** Menghapusnya dari commit terbaru tidak
+   cukup karena nilainya masih tersimpan di riwayat. Setelah dicabut, key
+   lama sudah tidak berguna.
+3. **`writable/` ikut ter-commit** karena tidak ada `.gitignore`. Berkas
+   cache/log/sesi bisa memuat data sensitif.
+
+## 🔧 Rencana Perbaikan
+
+Kalau ingin dijadikan proyek yang benar-benar bisa dipakai:
+
+- [ ] Tambahkan migration + seeder untuk `m_provinsi`, `m_kabupaten`,
+      `m_kecamatan` (datanya bisa diambil dari sumber publik seperti
+      [emsifa/api-wilayah-indonesia](https://github.com/emsifa/api-wilayah-indonesia))
+- [ ] Pindahkan API key ke `.env` dan tambahkan `.env.example`
+- [ ] Tambahkan `.gitignore` (minimal: `writable/*`, `vendor/`, `.env`)
+- [ ] Buat landing page di route `/`
+- [ ] Hapus `app/Controllers/Home__.php` atau perbaiki namespace-nya
+- [ ] Tambahkan pengujian untuk `homeModel`
 
 ## 📄 Lisensi
 
-Proyek ini dilisensikan di bawah MIT License — lihat berkas [`LICENSE`](./LICENSE).
+Lihat berkas [LICENSE](./LICENSE).
 
 ---
 
-<sub>README ini di-generate otomatis pada **2026-09-16 10:43:12 WIB** oleh GitHub Actions `.github/workflows/generate-readme.yml`.</sub>
+<sub>README ini ditulis manual, bukan hasil generate otomasi.</sub>
