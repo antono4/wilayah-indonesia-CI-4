@@ -1,16 +1,16 @@
 <!-- README ini dihasilkan otomatis oleh .github/workflows/generate-readme.yml -->
 <!-- Jangan edit manual: perubahan akan ditimpa pada run berikutnya. -->
 
-<h1 align="center">codeigniter4/framework 👋</h1>
+<h1 align="center">wilayah-indonesia-CI-4 👋</h1>
 
 <p align="center">
-  <strong>codeigniter4/framework</strong>
+  <em>API Wilayah Indonesia adalah API data wilayah seluruh indonesia mulai dari Provinsi, Kabupaten/Kota, Kecamatan dan Kelurahan/Desa.</em>
 </p>
 
 <p align="center">
   <a href="https://github.com/antono4/wilayah-indonesia-CI-4"><img alt="GitHub repo" src="https://img.shields.io/badge/GitHub-antono4/wilayah-indonesia-CI-4-blue?logo=github"></a>
   <img alt="Files" src="https://img.shields.io/badge/Files-601-informational">
-  <img alt="Updated" src="https://img.shields.io/static/v1?label=Updated&message=2026-09-16%2010%3A38%3A31%20WIB&color=lightgrey">
+  <img alt="Updated" src="https://img.shields.io/static/v1?label=Updated&message=2026-09-16%2010%3A43%3A12%20WIB&color=lightgrey">
 </p>
 
 ---
@@ -152,4 +152,4 @@ Proyek ini dilisensikan di bawah MIT License — lihat berkas [`LICENSE`](./LICE
 
 ---
 
-<sub>README ini di-generate otomatis pada **2026-09-16 10:38:31 WIB** oleh GitHub Actions `.github/workflows/generate-readme.yml`.</sub>
+<sub>README ini di-generate otomatis pada **2026-09-16 10:43:12 WIB** oleh GitHub Actions `.github/workflows/generate-readme.yml`.</sub>
